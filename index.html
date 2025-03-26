@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Email</title>
+    <script src="https://cdn.emailjs.com/sdk/latest/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("lSb93M9fowUY-VREWy3ya"); 
+        })();
+    </script>
+</head>
+<body>
+    <h2>Formulaire</h2>
+
+    <label>Nom :</label><br>
+    <input type="text" id="nom"><br>
+
+    <label>Prénom :</label><br>
+    <input type="text" id="prenom"><br>
+
+    <label>Âge :</label><br>
+    <input type="number" id="age"><br>
+
+    <label>Email :</label><br>
+    <input type="email" id="email"><br><br>
+
+    <button onclick="envoyerEmail()">Suivant</button>
+
+    <script>
+        function envoyerEmail(){
+            var params = {
+                nom: document.getElementById("nom").value,
+                prenom: document.getElementById("prenom").value,
+                age: document.getElementById("age").value,
+                email: document.getElementById("email").value,
+            };
+
+            const serviceID = "service_oz7dl6l";   
+            const templateID = "Gmail";  
+
+            emailjs.send(serviceID, templateID, params)
+            .then(res => {
+                alert("Mail envoyé avec succès !");
+            })
+            .catch(err => alert("Erreur: " + JSON.stringify(err)));
+        }
+    </script>
+</body>
+</html>
