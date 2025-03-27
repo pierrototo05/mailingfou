@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Email</title>
+    <script src="https://cdn.emailjs.com/sdk/latest/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("DFmwcTVXp4R5W3yPp"); 
+        })();
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ece9e6, #ffffff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #4A90E2;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Formulaire</h2>
+
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" placeholder="Entrez votre nom">
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" placeholder="Entrez votre prénom">
+
+        <label for="age">Âge :</label>
+        <input type="number" id="age" placeholder="Ex: 25">
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" placeholder="exemple@email.com">
+
+        <button onclick="envoyerEmail()">Suivant</button>
+    </div>
+
+    <script>
+        function envoyerEmail(){
+            var params = {
+                nom: document.getElementById("nom").value,
+                prenom: document.getElementById("prenom").value,
+                age: document.getElementById("age").value,
+                email: document.getElementById("email").value,
+            };
+
+            const serviceID = "service_3ie8foj";   
+            const templateID = "GMAIL";  
+
+            emailjs.send(serviceID, templateID, params)
+            .then(res => {
+                alert("✅ Mail envoyé avec succès !");
+            })
+            .catch(err => alert("❌ Erreur: " + JSON.stringify(err)));
+        }
+    </script>
+</body>
+</html>
